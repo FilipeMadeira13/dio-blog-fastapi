@@ -17,10 +17,10 @@ class PostService:
         )
         return await database.fetch_all(query)
 
-    async def read_post(self, post_id: int) -> Record:
+    async def read(self, post_id: int) -> Record:
         return await self.__get_by_id(post_id)
 
-    async def create_post(self, post: PostIn) -> int:
+    async def create(self, post: PostIn) -> int:
         command = posts.insert().values(
             title=post.title,
             content=post.content,
@@ -29,7 +29,7 @@ class PostService:
         )
         return await database.execute(command)
 
-    async def update_post(self, post: PostUpdateIn, post_id: int) -> Record:
+    async def update(self, post: PostUpdateIn, post_id: int) -> Record:
         total = await self.count(post_id)
         if not total:
             raise HTTPException(
@@ -42,7 +42,7 @@ class PostService:
 
         return await self.__get_by_id(post_id)
 
-    async def delete_post(self, post_id: int) -> None:
+    async def delete(self, post_id: int) -> None:
         command = posts.delete().where(posts.c.id == post_id)
         await database.execute(command)
 
