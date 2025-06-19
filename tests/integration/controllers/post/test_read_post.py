@@ -9,21 +9,21 @@ async def populate_posts(db):
     from src.services.post import PostService
 
     service = PostService()
-    await service.create_post(
+    await service.create(
         PostIn(
             title="post 1",
             content="some content",
             published=True,
         )
     )
-    await service.create_post(
+    await service.create(
         PostIn(
             title="post 2",
             content="some content",
             published=True,
         )
     )
-    await service.create_post(
+    await service.create(
         PostIn(
             title="post 3",
             content="some content",

@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from pydantic import BaseModel
+from pydantic import AwareDatetime, BaseModel
 
 
 class PostOut(BaseModel):
@@ -8,4 +6,4 @@ class PostOut(BaseModel):
     title: str
     content: str
     published: bool
-    published_at: datetime | None
+    published_at: AwareDatetime | None

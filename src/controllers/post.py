@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, status
+
 from src.schemas.post import PostIn, PostUpdateIn
 from src.security import login_required
 from src.services.post import PostService
@@ -26,7 +27,7 @@ async def read_post(id: int):
 
 @router.patch("/{id}", response_model=PostOut)
 async def update_post(id: int, post: PostUpdateIn):
-    return await service.update(id=id, post=post)
+    return await service.update(post=post, post_id=id)
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT, response_model=None)

@@ -9,21 +9,21 @@ async def populate_posts(db):
     from src.services.post import PostService
 
     service = PostService()
-    await service.create_post(
+    await service.create(
         PostIn(
             title="post 1",
             content="some content",
             published=True,
         )
     )
-    await service.create_post(
+    await service.create(
         PostIn(
             title="post 2",
             content="some content",
             published=True,
         )
     )
-    await service.create_post(
+    await service.create(
         PostIn(
             title="post 3",
             content="some content",
@@ -70,7 +70,9 @@ async def test_update_post_not_found_fail(client: AsyncClient, access_token: str
     data = {"title": "update title post 9999"}
 
     # When
-    response = await client.patch(f"/posts/{post_id}", json=data, headers=headers, follow_redirects=True)
+    response = await client.patch(
+        f"/posts/{post_id}", json=data, headers=headers, follow_redirects=True
+    )
 
     # Then
     assert response.status_code == status.HTTP_404_NOT_FOUND
