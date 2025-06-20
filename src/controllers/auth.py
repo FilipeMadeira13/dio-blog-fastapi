@@ -1,9 +1,10 @@
 from fastapi import APIRouter
+
 from src.schemas.auth import LoginIn
 from src.security import sign_jwt
 from src.views.auth import LoginOut
 
-router = APIRouter(prefix="/auth", tags=["auth"])
+router = APIRouter(prefix="/auth")
 
 
 @router.post("/login", response_model=LoginOut)
