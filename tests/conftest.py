@@ -1,11 +1,11 @@
 import asyncio
-import os
 
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
-from src.database import engine, metadata
 
-os.environ.setdefault("DATABASE_URL", "sqlite:///tests.db")
+from src.config import settings
+
+settings.database_url = "sqlite:///tests.db"
 
 
 @pytest_asyncio.fixture
