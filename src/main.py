@@ -47,7 +47,8 @@ app = FastAPI(
     openapi_tags=tags_metadata,
     servers=servers,
     redoc_url=None,
-    # openapi_url=None, # disable docs
+    # openapi_url=None, # disable docs,
+    lifespan=lifespan,
 )
 app.include_router(auth.router, tags=["auth"])
 app.include_router(post.router, tags=["post"])
