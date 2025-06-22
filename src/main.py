@@ -1,5 +1,3 @@
-from contextlib import asynccontextmanager
-
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -7,17 +5,6 @@ from fastapi.responses import JSONResponse
 from src.controllers import auth, post
 from src.database import database, engine, metadata
 from src.exceptions import NotFoundPostError
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    from src.models.post import posts  # noqa
-
-    await database.connect()
-    metadata.create_all(engine)
-    yield
-    await database.disconnect()
-
 
 tags_metadata = [
     {
@@ -51,7 +38,6 @@ app = FastAPI(
     servers=servers,
     redoc_url=None,
     # openapi_url=None, # disable docs
-    lifespan=lifespan,
 )
 app.include_router(auth.router, tags=["auth"])
 app.include_router(post.router, tags=["post"])
