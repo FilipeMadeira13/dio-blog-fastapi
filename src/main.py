@@ -1,10 +1,20 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from src.controllers import auth, post
-from src.database import database, engine, metadata
+from src.database import database
 from src.exceptions import NotFoundPostError
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await database.connect()
+    yield
+    await database.disconnect()
+
 
 tags_metadata = [
     {
