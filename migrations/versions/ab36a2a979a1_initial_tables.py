@@ -1,7 +1,7 @@
 """Initial tables
 
 Revision ID: ab36a2a979a1
-Revises: 636512708b04
+Revises:
 Create Date: 2025-06-21 05:00:27.994528
 
 """
@@ -13,7 +13,9 @@ from alembic import op
 
 # revision identifiers, used by Alembic.
 revision: str = "ab36a2a979a1"
-down_revision: Union[str, Sequence[str], None] = "636512708b04"
+down_revision: Union[str, Sequence[str], None] = (
+    None  # Changed from '636512708b04' to None
+)
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
